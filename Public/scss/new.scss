@@ -1,0 +1,23 @@
+#myeditor {
+  button {
+    padding: 10px 15px;
+  }
+  select {
+    padding: 5px 10px;
+  }
+
+  .btn-group {
+    display: block;
+    button {
+      padding: 5px 10px;
+      margin: 5px;
+    }
+  }
+  .editor {
+    border: solid 1px black;
+    background-color: white;
+    margin-top: 50px;
+    padding: 10px;
+    min-height: 400px;
+  }
+}

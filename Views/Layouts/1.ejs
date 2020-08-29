@@ -1,0 +1,45 @@
+<%- include('../partials/header.ejs')  %>
+<link rel="stylesheet" href="/stylesheets/layout.css">
+
+<%- include('../partials/navbar.ejs')  %>
+
+<button class="btn btn-primary" onclick="goBack()">Go Back</button>
+
+<div id="blog-container" class="container" data-id="<%= blog._id %>">
+  <h1><%- blog.title %> </h1>
+
+  <h5><%- blog.header %></h5>
+  <img src="<%=blog.imageURL%>" alt="">
+  <article id="content">
+    <%-blog.body[0]%>
+    <p><i>by <%= blog.author %></i></p>
+  </article>
+</div>
+
+<% if (type) { %>
+
+<% if (type == "publish") { %>
+<button class="btn btn-primary" onclick="changePublic()">Publish</button>
+<% } %>
+<% if (type == "unpublish") { %>
+<button class="btn btn-primary" onclick="changePublic()">UnPublish</button>
+<% } %>
+<% } %>
+
+<script>
+  const changePublic = () => {
+    let id = document.getElementById('blog-container').dataset.id;
+    fetch(`http://localhost:3000/blog/${id}/publish`, {
+        method: "PUT",
+        headers: {
+          Accept: "application/json", //* Tells the type of content the client can understand
+          "Content-type": "application/json", //* What kind of data we are sending through the body
+        }
+      }).then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
+  }
+</script>
+
+
+<%- include('../partials/footer.ejs')  %>

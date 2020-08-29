@@ -1,0 +1,86 @@
+<%- include('./partials/header.ejs')  %>
+
+<link rel="stylesheet" href="/stylesheets/new.css
+">
+<%- include('./partials/navbar.ejs')  %>
+
+<div class="container-fluid">
+  <h1>Create a new Article</h1>
+
+  <form class=" border p-5" action="javascript:void(0)">
+    <div class="form-group">
+      <label for="title">
+        <h3>Title : </h3>
+      </label>
+      <input type="text" class="form-control" id="title" placeholder="Title of Your Article">
+    </div>
+    <div class="form-group">
+      <label for="imglink">
+        <h3>Image : </h3>
+      </label>
+      <input type="text" class="form-control" id="imglink" placeholder="Main Image link of Your article">
+    </div>
+    <div class="form-group">
+      <label for="headerText">
+        <h3>Header : </h3>
+      </label>
+      <textarea type="text" class="form-control" id="headerText" placeholder="headerText" rows="3"></textarea>
+    </div>
+
+
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">
+        <h3>Select Layout</h3>
+      </label>
+      <select class="form-control" id="layoutId">
+        <option>1</option>
+        <option>2</option>
+      </select>
+    </div>
+
+
+    <h3>Body : </h3>
+    <div id="myeditor">
+      <button id="makeBold" class="btn btn-primary" onclick="changeEditor( 'makeBold','bold')">Bold</button>
+      <button id="makeItalic" class="btn btn-primary" onclick="changeEditor( 'makeItalic','italic')">Italic</button>
+
+
+      <select onchange="changeEditor('z','backcolor',this[this.selectedIndex].value)">
+        <option selected disabled>background color</option>
+        <option>White</option>
+        <option>Yellow</option>
+      </select>
+
+      <select onchange="changeEditor('z','forecolor',this[this.selectedIndex].value)">
+        <option selected disabled>font color</option>
+        <option>White</option>
+        <option>Red</option>
+        <option>Blue</option>
+      </select>
+
+      <div class="btn-group" role="group" aria-label="Basic example">
+
+        <button class="btn btn-warning" onclick="changeEditor( 'x','undo')">Undo</button>
+        <button class="btn btn-success" onclick="changeEditor( 'x','redo')">Redo</button>
+        <button class="btn btn-danger" onclick="clearText()">Clear</button>
+
+      </div>
+      <div class="editor">
+        Enter the body of the article here
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-warning" onclick="createBlog(false)">Save to Drafts</button>
+    <button type="button" class="btn btn-success" onclick="createBlog(true)">Publish</button>
+  </form>
+
+</div>
+
+<script>
+  document.querySelector('nav.navbar li.new').classList.add('active');
+</script>
+
+<script src="/scripts/new.js"></script>
+
+
+<%- include('./partials/footer.ejs')  %>

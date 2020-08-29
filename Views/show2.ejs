@@ -1,0 +1,54 @@
+<%- include('./partials/header.ejs')  %>
+
+<%- include('./partials/navbar.ejs')  %>
+
+<style>
+  #myCards {
+    display: flex;
+  }
+
+  .cards {
+    margin: 10px;
+
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+</style>
+
+<h1 class="m-5">My Blogs</h1>
+
+<div id="myCards" data-type="<%= type %>">
+
+  <% blogs.forEach(blog => { %>
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="<%= blog.imageURL %>" alt=" Card image cap">
+    <div class="card-body">
+      <h5 class="card-title"><%= blog.title %> </h5>
+      <p class="card-text"><%-blog.header.substring(0, 100) %>
+      </p>
+    </div>
+    <div class="card-body">
+
+      <button class="btn btn-primary"><a href="./<%= blog._id %>" class="card-link"> Know More</a></button>
+    </div>
+  </div>
+  <% }) %>
+
+</div>
+
+
+<script>
+  let name = document.getElementById('myCards');
+  console.log(name.dataset.type);
+  if (myCards.dataset.type === 'drafts')
+    document.querySelector('nav.navbar li.drafts').classList.add('active');
+  else if (myCards.dataset.type === 'index')
+    document.querySelector('nav.navbar li.index').classList.add('active');
+  else if (myCards.dataset.type === 'mine')
+    document.querySelector('nav.navbar li.mine').classList.add('active');
+</script>
+
+<%- include('./partials/footer.ejs')  %>

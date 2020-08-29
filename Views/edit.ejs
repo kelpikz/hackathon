@@ -1,0 +1,111 @@
+<%- include('./partials/header.ejs')  %>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">CMS</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">My Articles</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Drafts</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">New</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Log Out</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<link rel="stylesheet" href="/stylesheets/new.css
+">
+
+<div class="container-fluid">
+  <h1>Edit Your Article</h1>
+
+  <form class=" border p-5" action="javascript:void(0)" data-blogId="<%= blog._id %>">
+    <div class="form-group">
+      <label for="title">
+        <h3>Title : </h3>
+      </label>
+      <input type="text" class="form-control" id="title" value="<%= blog.title %>">
+    </div>
+    <div class="form-group">
+      <label for="imglink">
+        <h3>Image : </h3>
+      </label>
+      <input type="text" class="form-control" id="imglink" placeholder="Main Image link of Your article"
+        value="<%= blog.imageURL %>">
+    </div>
+    <div class="form-group">
+      <label for="headerText">
+        <h3>Header : </h3>
+      </label>
+      <textarea type="text" class="form-control" id="headerText" placeholder="headerText"
+        rows="3"><%= blog.header %></textarea>
+    </div>
+
+
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">
+        <h3>Select Layout</h3>
+      </label>
+      <select class="form-control" id="layoutId">
+        <option <%- blog.layout === 1 && "selected" %>>1</option>
+        <option <%- blog.layout === 2 && "selected" %>>2</option>
+      </select>
+    </div>
+
+
+    <h3>Body : </h3>
+    <div id="myeditor">
+      <button id="makeBold" class="btn btn-primary" onclick="changeEditor( 'makeBold','bold')">Bold</button>
+      <button id="makeItalic" class="btn btn-primary" onclick="changeEditor( 'makeItalic','italic')">Italic</button>
+
+
+      <select onchange="changeEditor('z','backcolor',this[this.selectedIndex].value)">
+        <option selected disabled>background color</option>
+        <option>White</option>
+        <option>Yellow</option>
+      </select>
+
+      <select onchange="changeEditor('z','forecolor',this[this.selectedIndex].value)">
+        <option selected disabled>font color</option>
+        <option>White</option>
+        <option>Red</option>
+        <option>Blue</option>
+      </select>
+
+      <div class="btn-group" role="group" aria-label="Basic example">
+
+        <button class="btn btn-warning" onclick="changeEditor( 'x','undo')">Undo</button>
+        <button class="btn btn-success" onclick="changeEditor( 'x','redo')">Redo</button>
+        <button class="btn btn-danger" onclick="clearText()">Clear</button>
+
+      </div>
+      <div class="editor">
+        <%- blog.body[0] %>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-warning" onclick="createBlog(false)">Save to Drafts</button>
+    <button type="button" class="btn btn-success" onclick="createBlog(true)">Publish</button>
+  </form>
+
+</div>
+
+
+<script src="/scripts/edit.js"></script>
+
+
+<%- include('./partials/footer.ejs')  %>
